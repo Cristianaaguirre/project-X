@@ -20,7 +20,7 @@
     <modules>
         <module>eureka-server</module>
         <module>gateway</module>
-        <module>post-service</module>
+        <module>user-service</module>
         <module>hometimeline-service</module>
         <module>usertimeline-service</module>
         <module>auth-service</module>
