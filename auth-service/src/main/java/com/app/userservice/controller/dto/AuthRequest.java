@@ -1,4 +1,4 @@
-package com.app.userservice.models.dto;
+package com.app.userservice.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

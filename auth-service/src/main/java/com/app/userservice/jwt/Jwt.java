@@ -1,4 +1,4 @@
-package com.app.userservice.security.util;
+package com.app.userservice.jwt;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

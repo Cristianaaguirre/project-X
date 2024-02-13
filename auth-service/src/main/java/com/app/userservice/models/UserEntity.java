@@ -1,6 +1,5 @@
-package com.app.userservice.models.entity;
+package com.app.userservice.models;
 
-import com.app.userservice.models.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 

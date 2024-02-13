@@ -1,7 +1,7 @@
 package com.app.userservice.controller;
 
-import com.app.userservice.models.dto.AuthRequest;
-import com.app.userservice.models.dto.RegisterDTO;
+import com.app.userservice.controller.dto.AuthRequest;
+import com.app.userservice.controller.dto.RegisterDTO;
 import com.app.userservice.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +14,11 @@ public class AuthController {
 
     private final IUserService userService;
 
+    @PostMapping("/validate")
+    public ResponseEntity<?> validateToken(@RequestBody String token) {
+        return ResponseEntity.ok(userService.validate(token));
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterDTO register) {
         userService.registerUser(register);
@@ -25,13 +30,4 @@ public class AuthController {
         return ResponseEntity.ok(userService.loginUser(authRequest));
     }
 
-    @GetMapping("/1")
-    public String test() {
-        return "I can read this message";
-    }
-
-    @GetMapping("/2")
-    public String test2() {
-        return "I can't read this message without authorization";
-    }
 }

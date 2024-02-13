@@ -1,8 +1,8 @@
-package com.app.userservice.models.mapper;
+package com.app.userservice.models;
 
-import com.app.userservice.models.enums.Role;
-import com.app.userservice.models.dto.RegisterDTO;
-import com.app.userservice.models.entity.UserEntity;
+import com.app.userservice.models.Role;
+import com.app.userservice.controller.dto.RegisterDTO;
+import com.app.userservice.models.UserEntity;
 
 public class UserMapper {
 

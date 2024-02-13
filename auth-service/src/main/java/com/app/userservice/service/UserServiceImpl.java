@@ -1,12 +1,11 @@
-package com.app.userservice.service.impl;
+package com.app.userservice.service;
 
-import com.app.userservice.security.util.Jwt;
-import com.app.userservice.models.dto.AuthRequest;
-import com.app.userservice.models.dto.RegisterDTO;
-import com.app.userservice.models.mapper.UserMapper;
-import com.app.userservice.models.repository.UserRepository;
-import com.app.userservice.service.IUserService;
-import com.app.userservice.service.JwtProvider;
+import com.app.userservice.jwt.Jwt;
+import com.app.userservice.controller.dto.AuthRequest;
+import com.app.userservice.controller.dto.RegisterDTO;
+import com.app.userservice.models.UserMapper;
+import com.app.userservice.models.UserRepository;
+import com.app.userservice.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;

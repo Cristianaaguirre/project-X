@@ -5,6 +5,10 @@ spring:
   application:
     name: auth-service
 
+jwt:
+  secret: jwtSecretKeyjwtSecretKeyjwtSecretKeyjwtSecretKeyjwtSecretKey
+  expiration: 86400
+
   datasource:
     url: jdbc:postgresql://localhost:5432/users
     username: postgres
@@ -21,6 +25,3 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
-
-
-jwt.secretKey: jwtSecretKeyjwtSecretKeyjwtSecretKeyjwtSecretKeyjwtSecretKey

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Key;
+import java.util.Date;
 
 @Service
 public class JwtProvider {
@@ -26,10 +27,12 @@ public class JwtProvider {
       try {
          return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
       } catch (Exception e) {
-         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
       }
    }
 
-
+   public Boolean isExpired(String token) {
+      return getClaims(token).getExpiration().before(new Date());
+   }
 
 }

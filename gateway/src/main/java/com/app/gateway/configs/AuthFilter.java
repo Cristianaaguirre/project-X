@@ -34,7 +34,8 @@ public class AuthFilter implements GatewayFilter {
          String token = request.getHeaders().getOrEmpty(HttpHeaders.AUTHORIZATION).get(0);
          String[] chunks = token.split(" ");
 
-         if(chunks.length != 2 || !chunks[0].startsWith("Bearer")) return onError(exchange);
+         if(chunks.length != 2 || !chunks[0].startsWith("Bearer") || provider.isExpired(chunks[1]))
+            return onError(exchange);
 
       }
 

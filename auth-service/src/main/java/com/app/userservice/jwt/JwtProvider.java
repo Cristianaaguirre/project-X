@@ -1,8 +1,6 @@
-package com.app.userservice.service;
+package com.app.userservice.jwt;
 
-import com.app.userservice.security.util.Jwt;
-import com.app.userservice.models.entity.UserEntity;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.app.userservice.models.UserEntity;
 
 public interface JwtProvider {
 

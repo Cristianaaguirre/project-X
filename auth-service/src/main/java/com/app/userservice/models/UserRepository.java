@@ -1,6 +1,6 @@
-package com.app.userservice.models.repository;
+package com.app.userservice.models;
 
-import com.app.userservice.models.entity.UserEntity;
+import com.app.userservice.models.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

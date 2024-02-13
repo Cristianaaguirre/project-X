@@ -1,9 +1,7 @@
-package com.app.userservice.security.service;
+package com.app.userservice.jwt;
 
 
-import com.app.userservice.security.util.Jwt;
-import com.app.userservice.service.JwtProvider;
-import com.app.userservice.models.entity.UserEntity;
+import com.app.userservice.models.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -12,15 +10,12 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 @Component
 public class JwtProviderImpl implements JwtProvider {
