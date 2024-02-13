@@ -1,8 +1,8 @@
-package com.app.userservice.common.security.service;
+package com.app.userservice.security.service;
 
 
-import com.app.userservice.common.security.util.Jwt;
-import com.app.userservice.common.security.util.JwtProvider;
+import com.app.userservice.security.util.Jwt;
+import com.app.userservice.service.JwtProvider;
 import com.app.userservice.models.entity.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -11,12 +11,15 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 @Component
@@ -36,39 +39,35 @@ public class JwtProviderImpl implements JwtProvider {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 
-    private  <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
-    }
-
-    private Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
-
     public String extractEmail(String token) {
-        return extractClaim(token, Claims::getSubject);
+        return extractAllClaims(token).getSubject();
     }
 
-    public Boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+    public void validate(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
     }
 
-    public Boolean validateEmail(String email, UserDetails userDetails) {
-        return email.equals(userDetails.getUsername());
-    }
+    public Jwt generateToken(UserEntity user) {
 
-    public String generateToken(UserEntity user, Integer timeExpiration) {
-        return Jwts.builder()
-                .claim("ROLE", List.of(user.getRole().getAuthority()))
-                .setSubject(user.getEmail())
+        var claims = Map.of(
+             "email", user.getEmail(),
+             "role", user.getRole().getAuthority(),
+             "id", user.getId()
+        );
+
+        var token =  Jwts.builder()
+                .setClaims(claims)
+                .setSubject(claims.get("id").toString())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + timeExpiration * 60 * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + 3 * 60 * 1000))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
-    }
 
-    public Jwt createToken(UserEntity user) {
-        return new Jwt(generateToken(user, 3));
+        return new Jwt(token);
     }
 
 

@@ -1,4 +1,4 @@
-package com.app.userservice.common.security.util;
+package com.app.userservice.security.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

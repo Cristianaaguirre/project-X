@@ -1,6 +1,6 @@
 package com.app.userservice.models.mapper;
 
-import com.app.userservice.common.security.util.Role;
+import com.app.userservice.models.enums.Role;
 import com.app.userservice.models.dto.RegisterDTO;
 import com.app.userservice.models.entity.UserEntity;
 
