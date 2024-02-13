@@ -1,8 +1,6 @@
-package com.app.postservice.services.impl;
+package com.app.postservice.services;
 
-import com.app.postservice.config.JwtProvider;
 import com.app.postservice.models.repository.FollowRepository;
-import com.app.postservice.services.IFollowService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Service;
 public class FollowServiceImpl implements IFollowService {
 
    private final FollowRepository followRepository;
-   private final JwtProvider jwtProvider;
 
    @Override
    public void following(String token, Long id) {
