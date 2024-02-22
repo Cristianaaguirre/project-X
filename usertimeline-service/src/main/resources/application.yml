@@ -1,1 +1,27 @@
+server:
+  port: 9494
 
+spring:
+  application:
+    name: usertimeline-service
+
+  data:
+    mongodb:
+      authentication-database: admin
+      uuid-representation: standard
+      database: usertimeline
+      port: 27017
+      host: localhost
+
+  cloud:
+    stream:
+      bindings:
+        consumer-in-0:
+          destination: post-topic
+          target: postConsumer
+        consumer-in-1:
+          destination: register-topic
+          target: registerConsumer
+
+    config:
+      enabled: false
