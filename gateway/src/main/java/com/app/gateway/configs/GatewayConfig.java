@@ -15,9 +15,18 @@ public class GatewayConfig {
    @Bean
    public RouteLocator routes(RouteLocatorBuilder builder) {
       return builder.routes()
-           .route(r -> r.path("")
+           .route(r -> r.path("/auth/**")
                 .filters(f -> f.filter(filter))
-                .uri(""))
+                .uri("lb://auth-service"))
+           .route(r -> r.path("/tweet/**", "/follow/**")
+                .filters(f -> f.filter(filter))
+                .uri("lb://user-service"))
+           .route(r -> r.path("/usertimeline/**")
+                .filters(f -> f.filter(filter))
+                .uri("lb://usertimeline-service"))
+           .route(r -> r.path("/hometimeline/**")
+                .filters(f -> f.filter(filter))
+                .uri("lb://hometimeline-service"))
            .build();
    }
 

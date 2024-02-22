@@ -28,8 +28,8 @@ public class AuthFilter implements GatewayFilter {
 
       if(validator.isSecured.test(request)) {
 
-         if (authMissing(request)) return onError(exchange);
-
+         if (authMissing(request))
+            return onError(exchange);
 
          String token = request.getHeaders().getOrEmpty(HttpHeaders.AUTHORIZATION).get(0);
          String[] chunks = token.split(" ");
