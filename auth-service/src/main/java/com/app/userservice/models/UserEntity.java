@@ -3,6 +3,8 @@ package com.app.userservice.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Builder
 @Getter @Setter
@@ -11,8 +13,7 @@ import lombok.*;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
     private String username;
     private String password;
     private String email;

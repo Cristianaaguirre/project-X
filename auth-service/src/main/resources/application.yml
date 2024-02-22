@@ -1,26 +1,23 @@
 server:
-  port: 9898
+  port: 9191
 
 spring:
   application:
     name: auth-service
-
-jwt:
-  secret: jwtSecretKeyjwtSecretKeyjwtSecretKeyjwtSecretKeyjwtSecretKey
-  expiration: 86400
-
   datasource:
     url: jdbc:postgresql://localhost:5432/users
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
       ddl-auto: create-drop
     generate-ddl: true
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+jwt:
+  secretKey: jwtSecretKeyjwtSecretKeyjwtSecretKeyjwtSecretKeyjwtSecretKey
 
 logging:
   level:

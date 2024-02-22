@@ -7,6 +7,7 @@ import com.app.userservice.models.UserMapper;
 import com.app.userservice.models.UserRepository;
 import com.app.userservice.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ public class UserServiceImpl implements IUserService {
    private final UserRepository repository;
    private final PasswordEncoder encoder;
    private final JwtProvider provider;
+   private final StreamBridge bridge;
 
    @Override
    public void registerUser(RegisterDTO register) {
@@ -33,6 +35,7 @@ public class UserServiceImpl implements IUserService {
       user.setPassword(password);
 
       repository.save(user);
+      bridge.send("register-topic", user.getId());
    }
 
    public Jwt loginUser(AuthRequest authRequest) {

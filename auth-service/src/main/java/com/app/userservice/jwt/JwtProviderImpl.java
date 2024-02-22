@@ -50,15 +50,15 @@ public class JwtProviderImpl implements JwtProvider {
 
         var claims = Map.of(
              "email", user.getEmail(),
-             "role", user.getRole().getAuthority(),
-             "id", user.getId()
+             "role", user.getRole().name(),
+             "id", user.getId().toString()
         );
 
         var token =  Jwts.builder()
                 .setClaims(claims)
-                .setSubject(claims.get("id").toString())
+                .setSubject(claims.get("id"))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 3 * 60 * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 

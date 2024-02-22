@@ -1,12 +1,5 @@
 package com.app.userservice.models;
 
-import org.springframework.security.core.GrantedAuthority;
-
-public enum Role implements GrantedAuthority {
+public enum Role  {
     USER;
-
-    @Override
-    public String getAuthority() {
-        return "ROLE_" + name();
-    }
 }
