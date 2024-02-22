@@ -1,9 +1,13 @@
-package com.app.postservice.models.repository;
+package com.app.postservice.models;
 
-import com.app.postservice.models.entity.FollowEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface FollowRepository extends JpaRepository<FollowEntity, Long> {
+
+   List<Long> findIdByFollowedUserId(Long followedUserId);
+
 }
