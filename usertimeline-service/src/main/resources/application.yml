@@ -14,14 +14,26 @@ spring:
       host: localhost
 
   cloud:
+    function:
+      definition: consumer;register
     stream:
       bindings:
         consumer-in-0:
           destination: post-topic
-          target: postConsumer
-        consumer-in-1:
+          group: post-group
+          consumer:
+            client-id: post-id
+        register-in-0:
           destination: register-topic
-          target: registerConsumer
-
+          group: register-group
+          consumer:
+            client-id: register-id
     config:
       enabled: false
+
+#logging:
+#  level:
+#    org.springframework.cloud.stream: DEBUG
+#    org.apache.kafka: DEBUG
+
+
