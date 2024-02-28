@@ -1,2 +1,38 @@
 server:
   port: 9292
+
+spring:
+  application:
+    name: hometimline-service
+
+  data:
+    mongodb:
+      authentication-database: admin
+      uuid-representation: standard
+      database: hometimeline
+      port: 27017
+      host: localhost
+
+    config:
+      enabled: false
+
+  cloud:
+    function:
+      definition: post;register;follow
+    stream:
+      bindings:
+        post-in-0:
+          destination: post-topic
+          group: post-group
+          consumer:
+            client-id: post-id
+        register-in-0:
+          destination: register-topic
+          group: register-group
+          consumer:
+            client-id: register-id
+        follow-in-0:
+          destination: follow-topic
+          group: follow-group
+          consumer:
+            client-id: follow-id

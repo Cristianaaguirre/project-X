@@ -12,3 +12,5 @@ target/
 *.iws
 *.iml
 *.ipr
+
+Kafka
