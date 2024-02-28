@@ -1,19 +1,14 @@
 package com.app.postservice.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Tweet {
-
-   private UUID userId;
-   private String message;
-   private LocalDateTime dateTime;
-
+public record Tweet(
+     UUID userId,
+     String message,
+     LocalDateTime dateTime
+) {
+   public Tweet(UUID uuid, String message) {
+      this(uuid, message, LocalDateTime.now());
+   }
 }

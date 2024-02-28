@@ -1,6 +1,6 @@
 package com.app.postservice.controller;
 
-import com.app.postservice.models.FollowRequest;
+import com.app.postservice.models.Follow;
 import com.app.postservice.services.IFollowService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class FollowController {
 
-   private final IFollowService followService;
+   private final IFollowService service;
 
    @PostMapping("/follow-user")
-   public ResponseEntity<?> followingUser(@RequestBody FollowRequest followRequest) {
-      followService.following(followRequest);
-      return null;
+   public ResponseEntity<?> followingUser(@RequestBody Follow follow) {
+      service.following(follow);
+      return ResponseEntity.status(201).build();
    }
 
 }

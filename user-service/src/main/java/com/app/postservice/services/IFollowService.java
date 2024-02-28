@@ -1,8 +1,8 @@
 package com.app.postservice.services;
 
-import com.app.postservice.models.FollowRequest;
+import com.app.postservice.models.Follow;
 
 public interface IFollowService {
 
-   void following(FollowRequest followRequestM);
+   void following(Follow followM);
 }
