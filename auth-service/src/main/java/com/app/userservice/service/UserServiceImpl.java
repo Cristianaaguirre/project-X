@@ -2,7 +2,7 @@ package com.app.userservice.service;
 
 import com.app.userservice.jwt.Jwt;
 import com.app.userservice.controller.dto.AuthRequest;
-import com.app.userservice.controller.dto.RegisterDTO;
+import com.app.userservice.controller.dto.RegisterRequest;
 import com.app.userservice.models.UserMapper;
 import com.app.userservice.models.UserRepository;
 import com.app.userservice.jwt.JwtProvider;
@@ -25,13 +25,13 @@ public class UserServiceImpl implements IUserService {
    private final StreamBridge bridge;
 
    @Override
-   public void registerUser(RegisterDTO register) {
+   public void registerUser(RegisterRequest register) {
 
-      if (repository.existsByEmail(register.getEmail()))
+      if (repository.existsByEmail(register.email()))
          throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The email is already registered");
 
       var user = UserMapper.dtoToEntity(register);
-      var password = encoder.encode(register.getPassword());
+      var password = encoder.encode(register.password());
       user.setPassword(password);
 
       repository.save(user);
@@ -40,10 +40,10 @@ public class UserServiceImpl implements IUserService {
 
    public Jwt loginUser(AuthRequest authRequest) {
       var user = Optional
-           .of(repository.findByEmail(authRequest.getEmail()))
+           .of(repository.findByEmail(authRequest.email()))
            .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Incorrect password or email"));
 
-      if (encoder.matches(authRequest.getPassword(), user.getPassword()))
+      if (encoder.matches(authRequest.password(), user.getPassword()))
          return provider.generateToken(user);
       else
          throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Incorrect password or email");

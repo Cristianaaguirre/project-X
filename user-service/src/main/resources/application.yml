@@ -5,19 +5,6 @@ spring:
   application:
     name: user-service
 
-  datasource:
-    url: jdbc:postgresql://localhost:5432/users
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    generate-ddl: true
-    show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-
   cloud:
     config:
       enabled: false

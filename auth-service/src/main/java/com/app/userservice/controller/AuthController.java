@@ -1,7 +1,7 @@
 package com.app.userservice.controller;
 
 import com.app.userservice.controller.dto.AuthRequest;
-import com.app.userservice.controller.dto.RegisterDTO;
+import com.app.userservice.controller.dto.RegisterRequest;
 import com.app.userservice.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterDTO register) {
+    public ResponseEntity<?> register(@RequestBody RegisterRequest register) {
         userService.registerUser(register);
         return ResponseEntity.status(201).build();
     }
