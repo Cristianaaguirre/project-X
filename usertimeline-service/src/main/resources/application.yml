@@ -19,14 +19,8 @@ spring:
     stream:
       bindings:
         consumer-in-0:
-          destination: post-topic
-          group: post-group
-          consumer:
-            client-id: post-id
+          destination: post-user-topic
         register-in-0:
-          destination: register-topic
-          group: register-group
-          consumer:
-            client-id: register-id
+          destination: register-user-topic
     config:
       enabled: false

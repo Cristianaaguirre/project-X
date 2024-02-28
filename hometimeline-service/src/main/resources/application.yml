@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: hometimline-service
+    name: hometimeline-service
 
   data:
     mongodb:
@@ -19,20 +19,13 @@ spring:
   cloud:
     function:
       definition: post;register;follow
+    config:
+      enabled: false
     stream:
       bindings:
         post-in-0:
-          destination: post-topic
-          group: post-group
-          consumer:
-            client-id: post-id
+          destination: post-home-topic
         register-in-0:
-          destination: register-topic
-          group: register-group
-          consumer:
-            client-id: register-id
+          destination: register-home-topic
         follow-in-0:
           destination: follow-topic
-          group: follow-group
-          consumer:
-            client-id: follow-id

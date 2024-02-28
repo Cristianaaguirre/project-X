@@ -10,7 +10,7 @@ import java.util.UUID;
 @Repository
 public interface HometimelineRepository extends MongoRepository<Hometimeline, UUID> {
 
-   @Query("{'following' : { '$in' : [?0]")
+   @Query("{'following': {'$in': [?0]}}")
    List<Hometimeline> getHometimelinesByUuid(UUID uuid);
 
 }

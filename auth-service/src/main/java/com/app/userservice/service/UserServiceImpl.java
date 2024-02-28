@@ -35,7 +35,9 @@ public class UserServiceImpl implements IUserService {
       user.setPassword(password);
 
       repository.save(user);
-      bridge.send("register-topic", user.getId());
+
+      bridge.send("register-user-topic", user.getId());
+      bridge.send("register-home-topic", user.getId());
    }
 
    public Jwt loginUser(AuthRequest authRequest) {

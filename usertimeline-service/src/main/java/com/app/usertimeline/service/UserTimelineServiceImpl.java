@@ -29,16 +29,17 @@ public class UserTimelineServiceImpl implements IUserTimelineService{
    @Bean
    public Consumer<Tweet> consumer() {
       return t -> {
-         var user = getTimeline(t.getUserId());
+         logger.info(String.valueOf(t));
+         var user = repository.findById(t.getUserId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No se ha encontrado el document"));
          user.getUserTimeline().add(t);
          repository.save(user);
-         logger.info(String.valueOf(user));
       };
    }
 
    @Bean
    public Consumer<UUID> register() {
       return r -> {
+         logger.info(r.toString());
          var timeline = new UserTimeline();
          timeline.setId(r);
          repository.insert(timeline);

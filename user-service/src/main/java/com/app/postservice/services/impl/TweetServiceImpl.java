@@ -13,7 +13,8 @@ public class TweetServiceImpl implements ITweetService {
    private final StreamBridge stream;
 
    public void postingTweet(Tweet tweet) {
-      stream.send("post-topic", tweet);
+      stream.send("post-user-topic", tweet);
+      stream.send("post-home-topic", tweet);
    }
 
 }
